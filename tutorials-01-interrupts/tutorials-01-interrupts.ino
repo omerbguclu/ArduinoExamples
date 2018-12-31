@@ -1,8 +1,10 @@
-int ledPin = 13;
-boolean led_durumu = LOW;
+int ledPin =         13;
+boolean led_state = LOW;
+int i =               0;
 
 void setup(){
   pinMode(ledPin,OUTPUT);
+  Serial.begin(9600);
   
   cli();
 
@@ -19,10 +21,12 @@ void setup(){
 
 
 ISR(TIMER1_COMPA_vect){     //Her kesmeye girildiğinde otomatik çalıştırılacak fonksiyon.
- led_durumu = !led_durumu;
-  digitalWrite(ledPin, led_durumu);
+  led_state = !led_state;
+  digitalWrite(ledPin, led_state);
 }
 
 void loop(){
-delay(10000);
+  Serial.print("loop ");
+  Serial.println(i++);
+  delay(5000);
 }
