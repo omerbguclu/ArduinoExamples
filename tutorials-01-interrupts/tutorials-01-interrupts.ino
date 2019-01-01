@@ -2,7 +2,7 @@ int ledPin =         13;
 int potpin =          0;
 boolean led_state = LOW;
 int i =               0;
-int val;
+int val, newVal;
 
 void setup(){
   pinMode(ledPin,OUTPUT);
@@ -24,8 +24,11 @@ void setup(){
 
 ISR(TIMER1_COMPA_vect){     //Her kesmeye girildiğinde otomatik çalıştırılacak fonksiyon.
   val = analogRead(potpin);            // reads the value of the potentiometer (value between 0 and 1023)
-  Serial.print("Servo Position: ");
-  Serial.println(val);
+  if(val!=newVal){
+    newVal=val;
+    Serial.print("Servo Position: ");
+    Serial.println(val);    
+  }
 }
 
 void loop(){
